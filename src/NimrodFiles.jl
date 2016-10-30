@@ -1,6 +1,6 @@
 module NimrodFiles
 
-export readnimrod_hdr
+export readnimrod_hdr, readnimrod, Nimrod
 
 # Header size in bytes
 const HEADER_SIZE = 512
@@ -68,5 +68,46 @@ function readnimrod_hdr(f::IOStream)::Array{Any,1}
                 data_real_elements,
                 data_char_elements,
                 data_extra_elements)
+end
+
+"""
+    readnimrod(fname::AbstractString)
+    readnimrod(f::IOStream)::Nimrod
+
+Read the Nimrod file at path `fname` or stream `f`. Returns an instance of
+`Nimrod{T}` where `T` is determined from the header of the file.
+"""
+readnimrod(fname::AbstractString) = open(readnimrod, fname)
+function readnimrod(f::IOStream)::Nimrod
+    seekstart(f)
+
+    hdr = readnimrod_hdr(f)
+    nrows = Int(hdr[16])
+    ncols = Int(hdr[17])
+
+    # Data can be integers or floats of varying sizes. Figure it out from the
+    # header.
+    data_format_code = hdr[12]
+    data_size_code = hdr[13]
+    dataType = Any
+
+    if data_format_code == 1 && data_size_code == 1
+        dataType = Int8
+    elseif data_format_code == 1 && data_size_code == 2
+        dataType = Int16
+    elseif data_format_code == 1 && data_size_code == 4
+        dataType = Int32
+    elseif data_format_code == 0 && data_size_code == 2
+        dataType = Float16
+    elseif data_format_code == 0 && data_size_code == 4
+        dataType = Float32
+    else
+        error("Unable to process data type specified in header. Type Code: $(data_format_code), Size: $(data_size_code)")
+    end
+
+    read(f, Int32) # Skip the data size specification
+    data = map(ntoh, read(f, dataType, (nrows, ncols)))
+
+    Nimrod(hdr, data)
 end
 end # module
