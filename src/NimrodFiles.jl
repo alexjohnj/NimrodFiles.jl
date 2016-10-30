@@ -8,6 +8,22 @@ const HEADER_SIZE = 512
 type HeaderSizeError <: Exception end
 
 """
+Representation of the contents of a Nimrod file. The type parameter `T` depends
+on the data type and size declared in fields 12 and 13 of the header.
+
+Fields
+======
+
+- hdr_dump::Array{Any} - Contents of header in the order defined in the Nimrod
+  specification.
+- data::Matrix{T} - Data contents of a Nimrod file.
+"""
+type Nimrod{T<:Real}
+    hdr_dump::Array{Any}
+    data::Matrix{T}
+end
+
+"""
     readnimrod_hdr(fname::AbstractString)
     readnimrod_hdr(f::IOStream)::Array{Any,1}
 
