@@ -36,6 +36,8 @@ type Nimrod{T<:Real}
 
     """(Easting, Northing) of lower left corner of image."""
     llcorner::Tuple{Real,Real}
+    """(Easting, Northing) of the centre of the lower left pixel."""
+    llcenter::Tuple{Real,Real}
 end
 
 """
@@ -123,6 +125,9 @@ function readnimrod(f::IOStream)::Nimrod
     read(f, Int32) # Skip the data size specification
     data = map(ntoh, read(f, dataType, (nrows, ncols)))
 
-    Nimrod(hdr, data, NimrodGridType(hdr[15]), hdr[37], hdr[35], (hdr[67], hdr[66]))
+    # Calculate the coordinates of the centre of the lower left resolution cell
+    llcenter = (hdr[36], hdr[34] - hdr[35] * (nrows - 1))
+
+    Nimrod(hdr, data, NimrodGridType(hdr[15]), hdr[37], hdr[35], (hdr[67], hdr[66]), llcenter)
 end
 end # module
