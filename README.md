@@ -1,8 +1,10 @@
 # NimrodFiles
 
+[![Build Status](https://travis-ci.org/alexjohnj/NimrodFiles.jl.svg?branch=master)](https://travis-ci.org/alexjohnj/NimrodFiles.jl)
+[![Build status](https://ci.appveyor.com/api/projects/status/0xwx5mqvn7bad44b?svg=true)](https://ci.appveyor.com/project/alexjohnj/nimrodfiles-jl)
+
 A Julia package for reading Nimrod files supplied by the Met Office. The package
-has been tested on a few composite radar images. It doesn't have any formal
-tests yet.
+has been tested on a few composite radar images.
 
 ## Usage
 
