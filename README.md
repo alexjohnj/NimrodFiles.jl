@@ -32,8 +32,8 @@ manner but only returns an array of the header contents.
 
 ## TODO
 
-- [ ] Add convenience fields to `Nimrod{T}` (e.g., date, nrows, ncols fields).
-- [ ] Add function to convert Nimrod files to an ASCII format.
+- [x] Add convenience fields to `Nimrod{T}` (e.g., date, nrows, ncols fields).
+- [x] Add function to convert Nimrod files to an ASCII format.
 
 ## License
 

@@ -1,6 +1,7 @@
 module NimrodFiles
 
 export readnimrod_hdr, readnimrod, Nimrod
+export toasciigrid
 
 """The horizontal grid type for the data. National Grid=0, latitude/longitude,
 space view, polar stereographic, xy or other."""
@@ -130,4 +131,6 @@ function readnimrod(f::IOStream)::Nimrod
 
     Nimrod(hdr, data, NimrodGridType(hdr[15]), hdr[37], hdr[35], (hdr[67], hdr[66]), llcenter)
 end
+
+include("./asciigrid.jl")
 end # module
