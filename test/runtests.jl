@@ -10,6 +10,7 @@ using Base.Test
         @testset "16-Bit Integer Data" begin
             expectedData = ones(Int16, (8,8)) * -1;
             expectedData[[i for i in 1:9:64]] = 5
+            expectedData[1,2] = 5
             testFile = readnimrod("test_hexed_composite_2BI.dat")
 
             @test size(testFile.data) == (8, 8)
@@ -29,6 +30,7 @@ using Base.Test
         @testset "32-Bit Integer data" begin
             expectedData = ones(Int32, (8,8)) * -1;
             expectedData[[i for i in 1:9:64]] = 5
+            expectedData[1,2] = 5
             testFile = readnimrod("test_hexed_composite_4BI.dat")
 
             @test size(testFile.data) == (8, 8)
@@ -48,6 +50,7 @@ using Base.Test
         @testset "32-Bit Floating Point data" begin
             expectedData = ones(Float32, (8,8)) * -1;
             expectedData[[i for i in 1:9:64]] = 5
+            expectedData[1,2] = 5.0
             testFile = readnimrod("test_hexed_composite_4BF.dat")
 
             @test size(testFile.data) == (8, 8)
@@ -75,7 +78,7 @@ xllcenter 5.0
 yllcenter -75.0
 cellsize 10.0
 nodata_value -1
-5 -1 -1 -1 -1 -1 -1 -1
+5 5 -1 -1 -1 -1 -1 -1
 -1 5 -1 -1 -1 -1 -1 -1
 -1 -1 5 -1 -1 -1 -1 -1
 -1 -1 -1 5 -1 -1 -1 -1

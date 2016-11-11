@@ -124,7 +124,7 @@ function readnimrod(f::IOStream)::Nimrod
     end
 
     read(f, Int32) # Skip the data size specification
-    data = map(ntoh, read(f, dataType, (nrows, ncols)))
+    data = map(ntoh, read(f, dataType, (ncols, nrows))')
 
     # Calculate the coordinates of the centre of the lower left resolution cell
     llcenter = (hdr[36], hdr[34] - hdr[35] * (nrows - 1))
