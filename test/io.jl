@@ -16,6 +16,7 @@
         @test isapprox(testFile.ypix_size, 10f0)
         @test testFile.llcorner == (0f0, -80f0)
         @test testFile.llcenter == (5f0, -75f0)
+        @test testFile.trcenter == (75f0, -5f0)
 
         @test testFile.hdr_dump[105] == "mm/h*32"
         @test testFile.hdr_dump[106] == "Plr single site radars"
@@ -36,6 +37,7 @@
         @test isapprox(testFile.ypix_size, 10f0)
         @test testFile.llcorner == (0f0, -80f0)
         @test testFile.llcenter == (5f0, -75f0)
+        @test testFile.trcenter == (75f0, -5f0)
 
         @test testFile.hdr_dump[105] == "mm/h*32"
         @test testFile.hdr_dump[106] == "Plr single site radars"
@@ -56,6 +58,7 @@
         @test isapprox(testFile.ypix_size, 10f0)
         @test testFile.llcorner == (0f0, -80f0)
         @test testFile.llcenter == (5f0, -75f0)
+        @test testFile.trcenter == (75f0, -5f0)
 
         @test testFile.hdr_dump[105] == "mm/h*32"
         @test testFile.hdr_dump[106] == "Plr single site radars"

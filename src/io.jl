@@ -88,8 +88,10 @@ function readnimrod(f::IOStream)::Nimrod
     read(f, Int32) # Skip the data size specification
     data = map(ntoh, read(f, dataType, (ncols, nrows))')
 
-    # Calculate the coordinates of the centre of the lower left resolution cell
+    # Calculate the coordinates of the centre of the lower left and top left
+    # resolution cells
     llcenter = (hdr[36], hdr[34] - hdr[35] * (nrows - 1))
+    trcenter = (hdr[36] + (ncols - 1) * hdr[37], hdr[34])
 
-    Nimrod(hdr, data, NimrodGridType(hdr[15]), hdr[37], hdr[35], (hdr[67], hdr[66]), llcenter)
+    Nimrod(hdr, data, NimrodGridType(hdr[15]), hdr[37], hdr[35], (hdr[67], hdr[66]), llcenter, trcenter)
 end

@@ -34,6 +34,8 @@ type Nimrod{T<:Real}
     llcorner::Tuple{Real,Real}
     """(Easting, Northing) of the centre of the lower left pixel."""
     llcenter::Tuple{Real,Real}
+    """(Easting, Northing) of the centre of the top right pixel."""
+    trcenter::Tuple{Real,Real}
 end
 
 include("./io.jl")
